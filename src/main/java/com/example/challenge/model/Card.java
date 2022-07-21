@@ -2,6 +2,8 @@ package com.example.challenge.model;
 
 import com.example.challenge.util.Brand;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,7 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "card")
 @Data
-
+@SQLDelete(sql = "UPDATE card SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Card {
 
     @Id
@@ -31,6 +34,7 @@ public class Card {
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
+    private boolean deleted = Boolean.FALSE;
 
     public boolean isValid() {
         return false;

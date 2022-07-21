@@ -2,6 +2,8 @@ package com.example.challenge.model;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "operation")
 @Data
+@SQLDelete(sql = "UPDATE operation SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Operation {
 
     @Id
@@ -27,4 +31,6 @@ public class Operation {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id", nullable = false)
     private Card card;
+
+    private boolean deleted = Boolean.FALSE;
 }
