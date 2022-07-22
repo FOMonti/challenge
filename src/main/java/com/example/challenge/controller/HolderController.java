@@ -13,21 +13,26 @@ import javax.validation.Valid;
 @RequestMapping("/holders")
 public class HolderController {
 
-    private final IHolderService iHolderService;
+    private final IHolderService holderService;
 
     @Autowired
     public HolderController(IHolderService iHolderService) {
-        this.iHolderService = iHolderService;
+        this.holderService = iHolderService;
     }
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody HolderDtoCreat holderDtoCreat) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(iHolderService.save(holderDtoCreat));
+        return ResponseEntity.status(HttpStatus.CREATED).body(holderService.save(holderDtoCreat));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getByiD(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(holderService.getHolderWithCards(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        iHolderService.delete(id);
+        holderService.delete(id);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

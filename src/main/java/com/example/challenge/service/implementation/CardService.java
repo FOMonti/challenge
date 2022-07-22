@@ -51,6 +51,16 @@ public class CardService implements ICardService {
     }
 
     @Override
+    public CardDto getById(Long id) {
+        Optional<Card> card = cardRepository.findById(id);
+        card.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
+        CardDto cardDto = cardMapper.cardEntity2Dto(card.get());
+        cardDto.setHolderDto(holderMapper.holderEntity2Dto(card.get().getCardHolder()));
+        return cardDto;
+    }
+
+    @Override
     public void delete(Long id) {
         Optional<Card> card = cardRepository.findById(id);
         card.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));

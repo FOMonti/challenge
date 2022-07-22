@@ -26,6 +26,11 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cardService.save(cardDtoCreate));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getByiD(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(cardService.getById(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         cardService.delete(id);
