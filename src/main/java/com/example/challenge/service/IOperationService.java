@@ -1,5 +1,6 @@
 package com.example.challenge.service;
 
+import com.example.challenge.dto.ConsultaDto;
 import com.example.challenge.dto.OperationDto;
 import com.example.challenge.dto.OperationDtoCreate;
 import com.example.challenge.model.Card;
@@ -15,6 +16,8 @@ public interface IOperationService {
     List<OperationDto> getOperationsBy(Long cardNumber);
 
     List<OperationDto> getAll();
+
+    ConsultaDto getConsulta(Long operationId);
 
     double getRate(Card card);
 }

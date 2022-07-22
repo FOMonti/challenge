@@ -1,5 +1,6 @@
 package com.example.challenge.service.implementation;
 
+import com.example.challenge.dto.ConsultaDto;
 import com.example.challenge.dto.OperationDto;
 import com.example.challenge.dto.OperationDtoCreate;
 import com.example.challenge.mapper.OperationMapper;
@@ -56,6 +57,18 @@ public class OperationService implements IOperationService {
         card.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         List<Operation> operations = operationRepository.getOperationByCard(card.get());
         return operationMapper.operationEntityList2DtoList(operations);
+    }
+
+    @Override
+    public ConsultaDto getConsulta(Long operationId) {
+        Optional<Operation> operation = operationRepository.findById(operationId);
+        operation.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+
+        ConsultaDto dto = new ConsultaDto();
+        dto.setConsumption(operation.get().getConsumption());
+        dto.setBrand(operation.get().getCard().getBrand());
+        dto.setBrandNumber(operation.get().getCard().getBrand().tasa(operation.get().getConsuptionDay()));
+        return dto;
     }
 
     @Override

@@ -29,6 +29,12 @@ public class OperationController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getConsulta(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(operationService.getConsulta(id));
+    }
+
+
     @GetMapping("/all")
     public ResponseEntity<?> getByAll() {
         return ResponseEntity.status(HttpStatus.OK).body(operationService.getAll());

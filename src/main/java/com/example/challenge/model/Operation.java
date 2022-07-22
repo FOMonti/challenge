@@ -8,6 +8,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "operation")
@@ -26,6 +27,9 @@ public class Operation {
 
     @NotNull(message = "consumption must no be null")
     private Double consumption;
+
+    @Column(name = "consumption_date")
+    private LocalDate consuptionDay;
 
     @NotNull(message = "Card must not be null.")
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

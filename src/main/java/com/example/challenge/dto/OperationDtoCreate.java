@@ -14,4 +14,7 @@ public class OperationDtoCreate {
 
     @NotNull(message = "consumption must no be null")
     private Double consumption;
+
+    @NotNull(message = "Consultion date must no be null")
+    private String consuptionDay;
 }
