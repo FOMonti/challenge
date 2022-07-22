@@ -24,4 +24,10 @@ public class HolderController {
     public ResponseEntity<?> save(@Valid @RequestBody HolderDtoCreat holderDtoCreat) {
         return ResponseEntity.status(HttpStatus.CREATED).body(iHolderService.save(holderDtoCreat));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        iHolderService.delete(id);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 }

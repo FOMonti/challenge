@@ -49,4 +49,11 @@ public class CardService implements ICardService {
         cardDto.setHolderDto(holderMapper.holderEntity2Dto(holder.get()));
         return cardDto;
     }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Card> card = cardRepository.findById(id);
+        card.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        cardRepository.delete(card.get());
+    }
 }

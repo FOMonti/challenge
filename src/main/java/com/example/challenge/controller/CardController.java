@@ -26,7 +26,7 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cardService.save(cardDtoCreate));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         cardService.delete(id);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
