@@ -58,6 +58,12 @@ public class OperationService implements IOperationService {
         return operationMapper.operationEntityList2DtoList(operations);
     }
 
+    @Override
+    public List<OperationDto> getAll() {
+        List<Operation> operations = operationRepository.findAll();
+        return operationMapper.operationEntityList2DtoList(operations);
+    }
+
 
     @Override
     public double getRate(Card card) {

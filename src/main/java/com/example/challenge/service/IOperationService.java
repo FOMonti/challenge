@@ -14,5 +14,7 @@ public interface IOperationService {
 
     List<OperationDto> getOperationsBy(Long cardNumber);
 
+    List<OperationDto> getAll();
+
     double getRate(Card card);
 }

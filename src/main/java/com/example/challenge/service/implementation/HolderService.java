@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,8 +44,14 @@ public class HolderService implements IHolderService {
         Optional<Holder> holder = holderRepository.findById(id);
         holder.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         HolderCompleteDto holderCompleteDto = holderMapper.holderEntityComplete(holder.get());
-        holderCompleteDto.setCardDtos(cardMapper.cardListEntity2DtoList(cardRepository.findByCardHolder(holder.get())));
+        holderCompleteDto.setCardDtos(cardMapper.cardListEntity2DtoBasicList(cardRepository.findByCardHolder(holder.get())));
         return holderCompleteDto;
+    }
+
+    @Override
+    public List<HolderDto> getAll() {
+        List<Holder> holders = holderRepository.findAll();
+        return holderMapper.holderEntityList2Dto(holders);
     }
 
 

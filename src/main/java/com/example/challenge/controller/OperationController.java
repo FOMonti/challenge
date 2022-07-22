@@ -16,22 +16,27 @@ import java.util.List;
 public class OperationController {
 
     @Autowired
-    private IOperationService iOperationService;
+    private IOperationService operationService;
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody OperationDtoCreate operationDtoCreate) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(iOperationService.save(operationDtoCreate));
+        return ResponseEntity.status(HttpStatus.CREATED).body(operationService.save(operationDtoCreate));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        iOperationService.delete(id);
+        operationService.delete(id);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getByAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(operationService.getAll());
     }
 
     @GetMapping()
     public ResponseEntity<?> findOperationsByCard(@RequestParam(name = "Card-Number") Long cardNumber) {
-        List<OperationDto> operationDtos = iOperationService.getOperationsBy(cardNumber);
+        List<OperationDto> operationDtos = operationService.getOperationsBy(cardNumber);
         return ResponseEntity.ok().body(!operationDtos.isEmpty() ? operationDtos : "a");
     }
 }

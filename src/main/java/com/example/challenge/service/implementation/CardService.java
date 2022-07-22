@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -59,6 +60,13 @@ public class CardService implements ICardService {
         cardDto.setHolderDto(holderMapper.holderEntity2Dto(card.get().getCardHolder()));
         return cardDto;
     }
+
+    @Override
+    public List<CardDto> getAll() {
+        List<Card> cards = cardRepository.findAll();
+        return cardMapper.cardListEntity2DtoList(cards);
+    }
+
 
     @Override
     public void delete(Long id) {

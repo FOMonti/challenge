@@ -25,6 +25,11 @@ public class HolderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(holderService.save(holderDtoCreat));
     }
 
+    @GetMapping
+    public ResponseEntity<?> getByAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(holderService.getAll());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getByiD(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(holderService.getHolderWithCards(id));

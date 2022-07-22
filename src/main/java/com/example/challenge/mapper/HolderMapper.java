@@ -6,6 +6,9 @@ import com.example.challenge.dto.HolderDtoCreat;
 import com.example.challenge.model.Holder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class HolderMapper {
 
@@ -30,5 +33,12 @@ public class HolderMapper {
         holderDto.setFirstName(holder.getFirstName());
         holderDto.setLastName(holder.getLastName());
         return holderDto;
+    }
+
+    public List<HolderDto> holderEntityList2Dto(List<Holder> holders) {
+        List<HolderDto> holderDtos = new ArrayList<>();
+        for (Holder holder : holders)
+            holderDtos.add(holderEntity2Dto(holder));
+        return holderDtos;
     }
 }

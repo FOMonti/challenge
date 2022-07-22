@@ -35,10 +35,18 @@ public class CardMapper {
         return card;
     }
 
-    public List<CardDtoBasic> cardListEntity2DtoList(List<Card> cards) {
+    public List<CardDtoBasic> cardListEntity2DtoBasicList(List<Card> cards) {
         List<CardDtoBasic> cardDtos = new ArrayList<>();
         for (Card card : cards) {
             cardDtos.add(cardEntity2DtoBasic(card));
+        }
+        return cardDtos;
+    }
+
+    public List<CardDto> cardListEntity2DtoList(List<Card> cards) {
+        List<CardDto> cardDtos = new ArrayList<>();
+        for (Card card : cards) {
+            cardDtos.add(cardEntity2Dto(card));
         }
         return cardDtos;
     }
